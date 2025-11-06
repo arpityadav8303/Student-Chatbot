@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+// AIzaSyA3bbq0iGpTr0c6nYPnavmwPKk6YZ5iGDI
+import React, { useState } from 'react';
+import HomePage from './components/HomePage';
+import WelcomePage from './components/WelcomePage';
+import ChatBox from './components/ChatBox';
 
-function App() {
+export default function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [studentName, setStudentName] = useState('');
+  const [studentClass, setStudentClass] = useState('');
+
+  const handleContinue = (name, classValue) => {
+    setStudentName(name);
+    setStudentClass(classValue);
+    setCurrentPage('welcome');
+  };
+
+  const handleBackToHome = () => {
+    setCurrentPage('home');
+    setStudentName('');
+    setStudentClass('');
+  };
+
+  const handleStartChat = () => {
+    setCurrentPage('chat');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {currentPage === 'home' && (
+        <HomePage onContinue={handleContinue} />
+      )}
+      {currentPage === 'welcome' && (
+        <WelcomePage
+          studentName={studentName}
+          studentClass={studentClass}
+          onBack={handleBackToHome}
+          onStartChat={handleStartChat}
+        />
+      )}
+      {currentPage === 'chat' && (
+        <ChatBox
+          studentName={studentName}
+          studentClass={studentClass}
+          onBack={() => setCurrentPage('welcome')}
+        />
+      )}
     </div>
   );
 }
-
-export default App;
