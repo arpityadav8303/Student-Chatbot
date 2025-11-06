@@ -3,7 +3,7 @@ import { Send, X, MessageCircle } from 'lucide-react';
 import './styles/style.css';
 
 //  ADD YOUR API KEY HERE 
-const GEMINI_API_KEY = "AIzaSyA3bbq0iGpTr0c6nYPnavmwPKk6YZ5iGDI";
+
 
 //  ALLOWED TOPICS FOR STUDY & CAREER
 const ALLOWED_TOPICS = {
